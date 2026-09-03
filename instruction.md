@@ -1,0 +1,1 @@
+我们使用 Django REST framework 的内置 OpenAPI schema 生成功能时，发现 URLConf 中通过 path 路由声明的参数转换器没有反映到生成结果，int 和 uuid 参数都会被输出为普通 string，导致接口文档、客户端代码生成和实际路由类型不一致。请修正这一行为，使 int 参数生成 integer schema，uuid 参数生成 type 为 string 且 format 为 uuid 的 schema，字符串类或无法可靠映射的转换器继续回退为 string。该修复也应适用于采用 path 路由模式并配置 lookup converter 的 Router，同时保持正则路由、URL 匹配和现有 schema 自定义行为不变。请补充相应的自动化测试。
